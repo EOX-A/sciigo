@@ -8,6 +8,9 @@ require 'bundler'
 require 'getoptlong'
 Bundler.require(:default)
 
+# require app files
+require './lib/sciigo.rb'
+
 # Variables used in Help and stuff
 APP_NAME = 'sciigo'
 APP_VERSION = File.read('./VERSION').split('.')
@@ -15,6 +18,7 @@ APP_VERSION = File.read('./VERSION').split('.')
 # Parse command line options
 opts = GetoptLong.new(
   [ "--transport", "-t", GetoptLong::REQUIRED_ARGUMENT],
+  [ "--debug", "-d", GetoptLong::NO_ARGUMENT],
   [ "--help",     "-h", GetoptLong::NO_ARGUMENT ],
   [ "--version",  "-v", GetoptLong::NO_ARGUMENT ]
 )
@@ -22,10 +26,10 @@ opts = GetoptLong.new(
 begin
   opts.each do |opt, arg|
     case opt
-    when "--transport" 
+    when '--transport'
       log.debug { 'Transport: %s' % arg }
       transport = arg.downcase.to_sym
-    when "--help"
+    when '--help'
       puts <<EOF
 Usage: #{__FILE__} --transport [transport]
 
@@ -35,11 +39,15 @@ set by a monitoring service like Nagios or Icinga, to function correctly.
 Other available options are
   --help      Display (this) help
   --version   Display the version number
+  --debug     Turn on debug output
 EOF
       exit 0
-    when "--version"
+    when '--version'
       puts "#{APP_NAME} v#{APP_VERSION.join(".")}"
       exit 0
+    when '--debug'
+      Sciigo::log.level = Logger::DEBUG
+      Sciigo::log.info { "Switched log level to %s" % Sciigo::log.level }
     end
   end
 
@@ -47,3 +55,6 @@ EOF
     log.fatal { "GetoptLong Exception, %p" % e }
   exit 10
 end
+
+# close the logfile
+Sciigo::log.close

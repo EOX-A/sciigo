@@ -1,6 +1,6 @@
 module Sciigo
   class Nagios
-    @@vars
+    @@vars = nil
 
     def initialize
       # collect all nagios environment variables for message templates
