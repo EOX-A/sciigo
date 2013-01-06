@@ -1,7 +1,7 @@
 require './lib/sciigo.rb'
 Dir['./lib/**/*.rb'].each { |file| require file }
 
-class Spinach::Features::TestNagiosDataCollection < Spinach::FeatureSteps
+class Spinach::Features::TestNagiosAbstraction < Spinach::FeatureSteps
   step 'I have an array of Environment Variables' do
     @env = { 
       "NAGIOS_CONTACTADDRESS1" => "", "NAGIOS_SERVICENOTESURL" => "", "NAGIOS_NOTIFICATIONCOMMENT" => "", "NAGIOS_NOTIFICATIONAUTHORALIAS" => "", "NAGIOS_ARG21" => "", 
@@ -54,11 +54,27 @@ class Spinach::Features::TestNagiosDataCollection < Spinach::FeatureSteps
   end
 
   step 'I instantiate a new Nagios class' do
-    @vars = Sciigo::Nagios.new()
+    @nagios = Sciigo::Nagios.new()
   end
 
   step 'the class should provides wrappers for nagios variables' do
-    raise Error unless @vars.servicedesc == "Sciigo Test"
-    raise Error unless @vars.contactalias == "Marko Locher"
+    raise StandardError unless @nagios.servicedesc == "Sciigo Test"
+    raise StandardError unless @nagios.contactalias == "Marko Locher"
+  end
+
+  step 'I ask it for the notification type' do
+    @type = @nagios.type
+  end
+
+  step 'the class should respond with the corresponding type' do
+    raise StandardError unless [ :problem, :recovery, :acknowledgement, :flappingstart, :flappingstop, :flappingdisabled, :downtimestart, :downtimeend, :downtimecancelled ].include?(@type)
+  end
+
+  step 'I ask for the notification category' do
+    @category = @nagios.category
+  end
+
+  step 'the class should respond with either service or host' do
+    raise StandardError unless [ :service, :host ].include?(@category)
   end
 end

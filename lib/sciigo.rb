@@ -4,7 +4,7 @@ module Sciigo
   end
 
   class Nagios
-    def initialize()
+    def initialize
       # collect all nagios environment variables for message templates
       # let them override any variables set in the config
       @vars = Hash.new()
@@ -16,20 +16,36 @@ module Sciigo
     end
 
     # implement array like accessors for the nagios environment variables
-    def []( key )
-      fetch( key )
+    def [](key)
+      fetch(key)
     end
 
-    def fetch( key )
+    def fetch(key)
       @vars[ key.downcase.to_sym ]
     end
 
-    def has_key?( key )
+    def has_key?(key)
       return @vars.has_key?( key.downcase.to_sym )
     end
 
-    def to_hash()
+    def to_hash
       return @vars
+    end
+
+    def category 
+      type ||= has_key?('SERVICEDESC') ? :service : :host
+    end
+
+    def service?
+      type == :service
+    end
+
+    def host?
+      type == :host
+    end
+
+    def type
+      type ||= @vars[ :notificationtype ].downcase.to_sym
     end
 
     # implement object like accessors for the nagios environment variables
