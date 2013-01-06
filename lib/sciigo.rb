@@ -1,4 +1,48 @@
 module Sciigo
+
+  class Error < StandardError
+  end
+
+  class Nagios
+    def initialize()
+      # collect all nagios environment variables for message templates
+      # let them override any variables set in the config
+      @vars = Hash.new()
+      ENV.each do |k, v|
+        if k =~ /^NAGIOS_(.+)/
+          @vars.store( $1.downcase.to_sym, v ) unless v.empty?
+        end
+      end
+    end
+
+    # implement array like accessors for the nagios environment variables
+    def []( key )
+      fetch( key )
+    end
+
+    def fetch( key )
+      @vars[ key.downcase.to_sym ]
+    end
+
+    def has_key?( key )
+      return @vars.has_key?( key.downcase.to_sym )
+    end
+
+    def to_hash()
+      return @vars
+    end
+
+    # implement object like accessors for the nagios environment variables
+    def method_missing( method, *args, &block )
+      if @vars.include?( method.downcase.to_sym )
+        @vars[method.downcase.to_sym]
+    else
+        # don't mess up to other method_missing magic ;)
+        super( method, *args, &block ) 
+      end
+    end
+  end
+
   module Transports
     class BasicTransport
       def initialize(config, data)
@@ -32,3 +76,5 @@ module Sciigo
   end
 
 end
+
+# => Dir["#{Rails.root}/features/steps/shared/*.rb"].each {|file| require file}

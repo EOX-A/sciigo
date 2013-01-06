@@ -4,7 +4,7 @@ module Sciigo
 	module Transports
 		class Lox24 < Sciigo::Transports::HTTP
 			def initialize(config, data)
-				superconfig, data)
+				super(config, data)
 			end
 
 			def uri
