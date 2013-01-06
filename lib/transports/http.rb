@@ -1,8 +1,8 @@
 require 'net/https'
 
 module Sciigo
-  module Transports
-    class HTTP < Sciigo::Transports::BasicTransport
+  module Transport
+    class HTTP < Sciigo::Transport::BasicTransport
       def initialize(config, data)
         super(config, data)
       end
@@ -28,7 +28,7 @@ module Sciigo
             request = Net::HTTP::Post.new(url.path)
             request.set_form_data( @data )
           else
-            raise Sciigo::Transports::Error,  'Unsupported HTTP request type %s' % type 
+            raise Sciigo::Transport::Error,  'Unsupported HTTP request type %s' % type 
           end
 
           response = Net::HTTP.new(url.host, url.port)

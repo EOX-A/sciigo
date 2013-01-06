@@ -2,6 +2,12 @@
 # taken from https://github.com/github/gitignore
 
 #
+# Sciigo specific
+#
+logs/*.log
+
+
+#
 # OS X
 #
 .DS_Store

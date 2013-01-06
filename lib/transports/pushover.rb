@@ -1,6 +1,6 @@
 module Sciigo
-	module Transports
-		class Pushover < Sciigo::Transports::HTTP
+	module Transport
+		class Pushover < Sciigo::Transport::HTTP
 			def initialize(config, data)
 				super(config, data)
 			end
@@ -17,7 +17,7 @@ module Sciigo
 			end
 
 			def validate
-				raise Sciigo::Transports::ParameterMissing.new if data[:token].nil? || data[:user].nil? || data[:message].nil? || data[:message].empty?
+				raise Sciigo::Transport::ParameterMissing.new if data[:token].nil? || data[:user].nil? || data[:message].nil? || data[:message].empty?
 			end
 
 			def send

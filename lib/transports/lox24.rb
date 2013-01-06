@@ -1,8 +1,8 @@
 require 'digest/md5'
 
 module Sciigo
-	module Transports
-		class Lox24 < Sciigo::Transports::HTTP
+	module Transport
+		class Lox24 < Sciigo::Transport::HTTP
 			def initialize(config, data)
 				super(config, data)
 			end
@@ -29,7 +29,7 @@ module Sciigo
 			end
 
 			def validate
-        raise Sciigo::Transports::ParameterMissing.new if data[:konto].nil? || data[:password].nil? || data[:service].nil? || data[:from].nil? || data[:to].nil? || data[:text].nil? || data[:text].empty?
+        raise Sciigo::Transport::ParameterMissing.new if data[:konto].nil? || data[:password].nil? || data[:service].nil? || data[:from].nil? || data[:to].nil? || data[:text].nil? || data[:text].empty?
 			end
 
 			def send
