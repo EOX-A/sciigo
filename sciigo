@@ -47,12 +47,12 @@ EOF
       exit 0
     when '--debug'
       Sciigo::log.level = Logger::DEBUG
-      Sciigo::log.info { "Switched log level to %s" % Sciigo::log.level }
+      Sciigo::log.info { "Switched log level to %s" % Logger::SEV_LABEL[ Sciigo::log.level ] }
     end
   end
 
-  rescue GetoptLong::Error => e
-    log.fatal { "GetoptLong Exception, %p" % e }
+rescue GetoptLong::Error => e
+  log.fatal { "GetoptLong Exception, %p" % e }
   exit 10
 end
 
