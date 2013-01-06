@@ -22,4 +22,7 @@ module Sciigo
   end
 end
 
-# => Dir["#{Rails.root}/features/steps/shared/*.rb"].each {|file| require file}
+# require all the files in the lib directory (where this file is located)
+Dir["#{File.dirname(__FILE__)}/*.rb"].each { |file|
+  require file
+}

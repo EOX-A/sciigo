@@ -31,3 +31,8 @@ module Sciigo
     end
   end
 end
+
+# require all the files in the lib/transports directory
+Dir["#{File.dirname(__FILE__)}/transports/*.rb"].each { |file|
+  require file
+}
