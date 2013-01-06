@@ -1,7 +1,7 @@
 require './lib/sciigo.rb'
 Dir['./lib/**/*.rb'].each { |file| require file }
 
-class Spinach::Features::TestNagiosAbstraction < Spinach::FeatureSteps
+class Spinach::Features::NagiosAbstraction < Spinach::FeatureSteps
   include CommonSteps::Nagios
 
   step 'the class should provides wrappers for nagios variables' do

@@ -1,4 +1,4 @@
-Feature: Test message model
+Feature: Message model
   
   Scenario: Test basic setup
     Given I have an array of Environment Variables

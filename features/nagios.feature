@@ -1,4 +1,4 @@
-Feature: Test nagios abstraction
+Feature: Nagios abstraction
   
   Scenario: Parse nagios environment variables
     Given I have an array of Environment Variables

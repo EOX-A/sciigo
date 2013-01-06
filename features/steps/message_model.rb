@@ -1,4 +1,7 @@
-class Spinach::Features::TestMessageModel < Spinach::FeatureSteps
+require './lib/sciigo.rb'
+Dir['./lib/**/*.rb'].each { |file| require file }
+
+class Spinach::Features::MessageModel < Spinach::FeatureSteps
   include CommonSteps::Nagios
 
   step 'I create a new instance of the message class' do
