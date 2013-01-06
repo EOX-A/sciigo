@@ -6,7 +6,7 @@
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
 # application settings
-set :application, "scriigo"
+set :application, "sciigo"
 #set :user, "deploy"
 set :use_sudo, false
 set :keep_releases, 2
@@ -17,7 +17,7 @@ ssh_options[:forward_agent] = true
 ssh_options[:paranoid] = false
 
 # repository settings
-set :repository, "git@gitlab.eox.at:marko.locher/scriigo.git"
+set :repository, "git@gitlab.eox.at:marko.locher/sciigo.git"
 set :branch, "production"
 set :git_shallow_clone, 1
 
