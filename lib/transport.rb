@@ -1,13 +1,13 @@
 module Sciigo
   module Transport
     
-    def self.new( transport, message )
+    def self.new(transport, message)
       require "#{File.dirname(__FILE__)}/transports/#{transport}.rb"
       return Sciigo::Transport.const_get(transport.to_s.capitalize).new(message)
     end
 
     class BasicTransport
-      def initialize( message )
+      def initialize(message)
         @message = message
       end
 

@@ -7,7 +7,8 @@ module Sciigo
     def initialize(notification)
       @notification = notification
       @time = Time.now
-      @template = @@templates[ @notification.category ][ @notification.type ]
+      @category = @notification.category.to_s
+      @type = @notification.type.to_s
     end
 
     def recipient
@@ -54,9 +55,13 @@ module Sciigo
     private
     def template(tmpl)
       raise Sciigo::Error if tmpl.nil? || tmpl.empty?
-      return @@templates[ @notification.category ][ @notification.type ][ tmpl ] if @@templates[ @notification.category ][ @notification.type ].has_key? tmpl
-      return @@templates[ @notification.category ][ 'default' ][ tmpl ] if @@templates[ @notification.category ][ 'default' ].has_key? tmpl
-      return @@templates[ 'default' ][ tmpl ] if @@templates[ 'default' ].has_key? tmpl
+      begin
+        return @@templates[ @category ][ @type ][ tmpl ] if @@templates[ @category ][ @type ].has_key? tmpl
+        return @@templates[ @category ][ 'default' ][ tmpl ] if @@templates[ @category ][ 'default' ].has_key? tmpl
+        return @@templates[ 'default' ][ tmpl ] if @@templates[ 'default' ].has_key? tmpl
+      rescue NoMethodError => e
+        return nil
+      end
       return nil
     end
 
