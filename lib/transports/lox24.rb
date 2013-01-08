@@ -1,10 +1,11 @@
 require 'digest/md5'
+require './lib/transports/http.rb'
 
 module Sciigo
 	module Transport
 		class Lox24 < Sciigo::Transport::HTTP
-			def initialize(config, data)
-				super(config, data)
+			def initialize( message )
+				super( message )
 			end
 
 			def uri

@@ -1,8 +1,10 @@
+require './lib/transports/http.rb'
+
 module Sciigo
 	module Transport
 		class Pushover < Sciigo::Transport::HTTP
-			def initialize(config, data)
-				super(config, data)
+			def initialize( message )
+				super( message )
 			end
 
 			def uri

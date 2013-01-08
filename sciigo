@@ -17,18 +17,18 @@ APP_VERSION = File.read('./VERSION').split('.')
 
 # Parse command line options
 opts = GetoptLong.new(
-  [ "--transport", "-t", GetoptLong::REQUIRED_ARGUMENT],
-  [ "--debug", "-d", GetoptLong::NO_ARGUMENT],
-  [ "--help",     "-h", GetoptLong::NO_ARGUMENT ],
-  [ "--version",  "-v", GetoptLong::NO_ARGUMENT ]
+  [ "--transport",  "-t", GetoptLong::REQUIRED_ARGUMENT ],
+  [ "--debug",      "-d", GetoptLong::NO_ARGUMENT ],
+  [ "--help",       "-h", GetoptLong::NO_ARGUMENT ],
+  [ "--version",    "-v", GetoptLong::NO_ARGUMENT ]
 )
 
 begin
   opts.each do |opt, arg|
     case opt
     when '--transport'
-      log.debug { 'Transport: %s' % arg }
-      transport = arg.downcase.to_sym
+      Sciigo::log.debug { 'Transport: %s' % arg }
+      @transport = arg.downcase.to_sym
     when '--help'
       puts <<EOF
 Usage: #{__FILE__} --transport [transport]
@@ -56,5 +56,9 @@ rescue GetoptLong::Error => e
   exit 10
 end
 
-# close the logfile
+# do the work ;)
+Sciigo::Transport.new( @transport, Sciigo::Message.new ).send
+
+# close the logfile and exit
 Sciigo::log.close
+exit 0

@@ -3,8 +3,8 @@ require 'net/https'
 module Sciigo
   module Transport
     class HTTP < Sciigo::Transport::BasicTransport
-      def initialize(config, data)
-        super(config, data)
+      def initialize( message )
+        super( message )
       end
 
       protected
