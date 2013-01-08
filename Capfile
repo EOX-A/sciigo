@@ -26,7 +26,7 @@ set :deploy_to, "/opt/#{application}"
 set :deploy_via, :remote_cache
 
 # where should we deploy to?
-server "nix.eox.at", :app, :web
+server "nix.eox.at", :app
 
 # this tells capistrano what to do when you deploy
 namespace :deploy do
