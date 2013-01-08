@@ -1,0 +1,52 @@
+# There are two main types, Host and Service notifications. Each contains a 
+# few different notification (sub) types, listed at [1]. If a template for a
+# specific type is not present, it will fall back to the default entry.
+# Each notification type takes the following data
+# * a (optional) title
+# * a message
+# * a (optional) priority, allowed values are -1, 0 and 1
+# * a (optional) sound parameter, allowed values are specified at [2]
+# The title and the message are parsed via the Liquid [3] templating system
+# and have access to the full array of Nagios environment variables [4]
+# 
+# [1] http://nagios.sourceforge.net/docs/3_0/macrolist.html#notificationtype
+# [2] https://api.pushover.net/1/sounds.json
+# [3] http://liquidmarkup.org/
+# [4] http://nagios.sourceforge.net/docs/3_0/macrolist.html
+host: 
+  default:
+    title: "{{HOSTNAME}} is {{ HOSTSTATE | downcase }}"
+    message: "You need to check that immediately. Check said '{{HOSTOUTPUT}}'!"
+  problem:
+    title: "There is a problem with {{HOSTNAME}}!"
+    message: "Host is {{ HOSTSTATE | downcase }} since {{SERVICEDURATION}}. Check said '{{HOSTOUTPUT}}'"
+  recovery:
+    title: "{{HOSTNAME}} is fine again!"
+    message: "Host is {{ HOSTSTATE | downcase }} since {{HOSTDURATION}}. Check said '{{HOSTOUTPUT}}'"
+service:
+  default:
+    title: "S {{SERVICEDESC}} on {{HOSTNAME}}!"
+    message: "Please check the service, there might be a problem! Service said '{{SERVICEOUTPUT}}'"
+  problem:
+    title: "S {{SERVICEDESC}}: {{SERVICESTATE}} on {{HOSTNAME}}!"
+    message: "Service State is {{SERVICESTATE | downcase}} since {{SERVICEDURATION}}. Service said '{{SERVICEOUTPUT}}'"
+  recovery:
+    title: "S {{SERVICEDESC}}: {{SERVICESTATE}} on {{HOSTNAME}}!"
+    message: "Service State is {{SERVICESTATE | downcase}} since {{SERVICEDURATION}}. Service said '{{SERVICEOUTPUT}}'"
+  acknowledgment:
+    title: "S Ack for {{SERVICEDESC}} on {{HOSTNAME}}!"
+    message: "{{SERVICEACKAUTHOR}} acknowledged the problem! Comment was '{{SERVICEACKCOMMENT}}'"
+  downtimestart:
+    title: "S Downtime for {{SERVICEDESC}} on {{HOSTNAME}}!"
+    message: "{{NOTIFICATIONAUTHOR}} scheduled some downtime." 
+    priority: -1
+  downtimeend:
+    message: "Downtime for {{SERVICEDESC}} on {{HOSTNAME}} is over!"
+    priority: -1
+  downtimecancelled:
+    message: "{{NOTIFICATIONAUTHOR}} cancelled the downtime for {{SERVICEDESC}} on {{HOSTNAME}}!" 
+    priority: -1
+  flappingstart:
+    message: "{{SERVICEDESC}} on {{HOSTNAME}} started flapping! Maybe you should really take a look!"
+  flappingdisabled:
+    message: "{{SERVICEDESC}} on {{HOSTNAME}} stopped flapping! Grab a coffee!"

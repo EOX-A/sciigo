@@ -47,12 +47,22 @@ EOF
   end
 
 rescue GetoptLong::Error => e
-  log.fatal { "GetoptLong Exception, %p" % e }
+  Sciigo::log.fatal { "GetoptLong Exception, %s" % e }
   exit 10
 end
 
-# do the work ;)
-Sciigo::Transport.new( @transport, Sciigo::Message.new ).send
+begin
+  # do the work ;)
+  if @transport.nil?
+    puts "Missing required option '--transport [transport]'!\nSee '#{__FILE__} -h' for help."
+    exit 10
+  end 
+  Sciigo::Transport.new(@transport, Sciigo::Message.new(Sciigo::Nagios.new)).send
+rescue Sciigo::Error => e
+  Sciigo::log.fatal { "%s" % e }
+  exit 10
+end
+
 
 # close the logfile and exit
 Sciigo::log.close
