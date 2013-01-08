@@ -3,12 +3,7 @@
 # change to the install dir
 Dir.chdir(File.expand_path(File.dirname(__FILE__)))
 
-require 'rubygems'
-require 'bundler'
 require 'getoptlong'
-Bundler.require(:default)
-
-# require app files
 require './lib/sciigo.rb'
 
 # Variables used in Help and stuff

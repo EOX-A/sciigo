@@ -1,5 +1,9 @@
+require 'rubygems'
+require 'bundler'
 require 'yaml'
 require 'logger'
+
+Bundler.require(:default)
 
 module Sciigo
   @@config = ::YAML.load_file('config/sciigo.yml')
