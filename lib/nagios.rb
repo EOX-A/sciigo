@@ -31,19 +31,19 @@ module Sciigo
     end
 
     def category 
-      type ||= has_key?('SERVICEDESC') ? :service : :host
+      @category ||= has_key?('SERVICEDESC') ? :service : :host
     end
 
     def service?
-      type == :service
+      category == :service
     end
 
     def host?
-      type == :host
+      category == :host
     end
 
     def type
-      type ||= @@vars[ :notificationtype ].downcase.to_sym
+      @type ||= @@vars[ :notificationtype ].downcase.to_sym
     end
 
     # implement object like accessors for the nagios environment variables
