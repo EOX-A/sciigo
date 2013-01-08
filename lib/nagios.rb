@@ -11,6 +11,8 @@ module Sciigo
           @@vars.store( $1.downcase.to_sym, v ) unless v.empty?
         end
       end unless @@vars.length > 0
+
+      raise Sciigo::Error, "Missing Nagios environment variables, is this script being invoked by nagios?" if @@vars.nil? || @@vars.empty?
     end
 
     # implement array like accessors for the nagios environment variables
