@@ -16,11 +16,11 @@ module Sciigo
     end
 
     def message
-      return @message ||= Liquid::Template.parse(template('message'))
+      return @message ||= Liquid::Template.parse(template('message')).render(@notification)
     end
 
     def title
-      return @message ||= Liquid::Template.parse(template('title')) 
+      return @title ||= Liquid::Template.parse(template('title')).render(@notification)
     end
 
     def time

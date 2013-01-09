@@ -48,5 +48,5 @@ env = {
 }
 
 ENV.update( env )
-exec( 'ruby ../sciigo --transport pushover' )
-#exec( 'ruby ../sciigo --transport lox24' )
+#exec( 'ruby ../sciigo --transport pushover' )
+exec( 'ruby ../sciigo --transport lox24' )
