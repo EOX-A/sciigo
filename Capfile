@@ -6,18 +6,18 @@
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 
 # application settings
-set :application, "scriigo"
+set :application, "sciigo"
 #set :user, "deploy"
 set :use_sudo, false
 set :keep_releases, 2
-set :copy_exclude, [".git", "Capfile"]
+set :copy_exclude, [".git", "Capfile", "*.sublime-project", "*.sublime-workspace", "logs/*", "tmp/*", ".gitignore", "features/*"]
 
 # ssh options
 ssh_options[:forward_agent] = true
 ssh_options[:paranoid] = false
 
 # repository settings
-set :repository, "git@gitlab.eox.at:marko.locher/scriigo.git"
+set :repository, "git@gitlab.eox.at:marko.locher/sciigo.git"
 set :branch, "production"
 set :git_shallow_clone, 1
 
@@ -26,7 +26,7 @@ set :deploy_to, "/opt/#{application}"
 set :deploy_via, :remote_cache
 
 # where should we deploy to?
-server "nix.eox.at", :app, :web
+server "nix.eox.at", :app
 
 # this tells capistrano what to do when you deploy
 namespace :deploy do

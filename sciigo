@@ -1,0 +1,69 @@
+#!/usr/bin/ruby
+
+# change to the install dir
+Dir.chdir(File.expand_path(File.dirname(__FILE__)))
+
+require 'getoptlong'
+require './lib/sciigo.rb'
+
+# Variables used in Help and stuff
+APP_NAME = 'sciigo'
+APP_VERSION = File.read('./VERSION').split('.')
+
+# Parse command line options
+opts = GetoptLong.new(
+  [ "--transport",  "-t", GetoptLong::REQUIRED_ARGUMENT ],
+  [ "--debug",      "-d", GetoptLong::NO_ARGUMENT ],
+  [ "--help",       "-h", GetoptLong::NO_ARGUMENT ],
+  [ "--version",    "-v", GetoptLong::NO_ARGUMENT ]
+)
+
+begin
+  opts.each do |opt, arg|
+    case opt
+    when '--transport'
+      Sciigo::log.debug { 'Transport: %s' % arg }
+      @transport = arg.downcase.to_sym
+    when '--help'
+      puts <<EOF
+Usage: #{__FILE__} --transport [transport]
+
+Note that this programm requires a bunch of environment variables, typically 
+set by a monitoring service like Nagios or Icinga, to function correctly.
+
+Other available options are
+  --help      Display (this) help
+  --version   Display the version number
+  --debug     Turn on debug output
+EOF
+      exit 0
+    when '--version'
+      puts "#{APP_NAME} v#{APP_VERSION.join(".")}"
+      exit 0
+    when '--debug'
+      Sciigo::log.level = Logger::DEBUG
+      Sciigo::log.info { "Switched log level to %s" % Logger::SEV_LABEL[ Sciigo::log.level ] }
+    end
+  end
+
+rescue GetoptLong::Error => e
+  Sciigo::log.fatal { "GetoptLong Exception, %s" % e }
+  exit 10
+end
+
+begin
+  # do the work ;)
+  if @transport.nil?
+    puts "Missing required option '--transport [transport]'!\nSee '#{__FILE__} -h' for help."
+    exit 10
+  end 
+  Sciigo::Transport.new(@transport, Sciigo::Message.new(Sciigo::Nagios.new)).send
+rescue Sciigo::Error => e
+  Sciigo::log.fatal { "%s" % e }
+  exit 10
+end
+
+
+# close the logfile and exit
+Sciigo::log.close
+exit 0
