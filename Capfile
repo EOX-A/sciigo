@@ -10,7 +10,7 @@ set :application, "sciigo"
 #set :user, "deploy"
 set :use_sudo, false
 set :keep_releases, 2
-set :copy_exclude, [".git", "Capfile", "*.sublime-project", "*.sublime-workspace", "logs/*", "tmp/*", ".gitignore", "features/*"]
+set :copy_exclude, [".git", "Capfile", "*.sublime-project", "*.sublime-workspace", "logs/*", "tmp/*", ".gitignore", "features/*", "*.example"]
 
 # ssh options
 ssh_options[:forward_agent] = true
