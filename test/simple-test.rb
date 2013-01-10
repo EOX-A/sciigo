@@ -47,6 +47,8 @@ env = {
   "NAGIOS_MAXHOSTATTEMPTS" => "10", "NAGIOS_ARG20" => ""
 }
 
-ENV.update( env )
-#exec( 'ruby ../sciigo --transport pushover' )
-exec( 'ruby ../sciigo --transport lox24' )
+ENV.update(env)
+exec( 'ruby ../sciigo --transport pushover' )
+
+#ENV.update({"NAGIOS_CONTACTEMAIL" => "#{ add your number here}"})
+#exec( 'ruby ../sciigo --transport lox24' )
