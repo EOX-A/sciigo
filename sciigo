@@ -26,7 +26,7 @@ begin
       @transport = arg.downcase.to_sym
     when '--help'
       puts <<EOF
-Usage: #{__FILE__} --transport [transport]
+Usage: #{__FILE__}
 
 Note that this programm requires a bunch of environment variables, typically 
 set by a monitoring service like Nagios or Icinga, to function correctly.
@@ -52,14 +52,10 @@ rescue GetoptLong::Error => e
 end
 
 begin
-  # do the work ;)
-  if @transport.nil?
-    puts "Missing required option '--transport [transport]'!\nSee '#{__FILE__} -h' for help."
-    exit 10
-  end 
-  Sciigo::Transport.new(@transport, Sciigo::Message.new(Sciigo::Nagios.new)).send
+  notification = Sciigo::Nagios.new
+  Sciigo::Transport.new(notification.transport, Sciigo::Message.new(notification)).send
 rescue Sciigo::Error => e
-  Sciigo::log.fatal { "%s" % e }
+  Sciigo::log.fatal { "%s, Exiting!" % e }
   exit 10
 end
 
