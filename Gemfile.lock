@@ -1,9 +1,23 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    capistrano (2.13.5)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     colorize (0.5.8)
     gherkin-ruby (0.2.1)
+    highline (1.6.15)
     mustache (0.99.4)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.6.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     spinach (0.7.0)
       colorize
       gherkin-ruby (~> 0.2.0)
@@ -12,5 +26,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  capistrano
   mustache
   spinach
