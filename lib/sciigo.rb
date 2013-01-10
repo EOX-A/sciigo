@@ -7,10 +7,15 @@ Bundler.require(:default)
 
 module Sciigo
   @@config = ::YAML.load_file('config/sciigo.yml')
+  @@conf_dir = nil
   @@logger = nil
 
   def self.config
     @@config
+  end
+
+  def self.conf_dir
+    @@conf_dir ||= File.expand_path(File.join(File.dirname(__FILE__), '..', 'config'))
   end
 
   def self.log
