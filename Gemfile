@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-# liquid template engine
-gem 'liquid'
+# mustache template engine
+gem "mustache"
 
 group :test do
   gem 'spinach'
