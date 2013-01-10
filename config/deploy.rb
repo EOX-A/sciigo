@@ -4,9 +4,10 @@ require 'bundler/capistrano'
 set :application, "sciigo"
 set :user, "deploy"
 set :use_sudo, false
-set :keep_releases, 2
+set :keep_releases, 4
 set :copy_exclude, [".git", "Capfile", "*.sublime-project", "*.sublime-workspace", "logs/*", "tmp/*", ".gitignore", "features/*", "*.example"]
-set :default_environment, { 'PATH' => '/var/lib/gems/1.8/bin/:$PATH' }
+# for some reason capistrano doesn't find bundle on it's own
+set :default_environment, { 'PATH' => '/usr/sbin/:$PATH' }
 set :normalize_asset_timestamps, false
 
 # ssh options
@@ -31,7 +32,7 @@ after "deploy:restart", "deploy:cleanup"
 # no need to start, stop, ... anything, as this app is only a script called
 # by nagios / icinga
 namespace :deploy do
-   task :start do ; end
-   task :stop do ; end
-   task :restart do ; end
+    task :start do ; end
+    task :stop do ; end
+    task :restart do ; end
 end
