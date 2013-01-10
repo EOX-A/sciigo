@@ -5,7 +5,7 @@
 # Sciigo specific
 #
 logs/*.log
-
+config/sciigo.yml
 
 #
 # OS X
