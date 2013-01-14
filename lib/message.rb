@@ -2,7 +2,7 @@ require 'uri'
 
 module Sciigo
   class Message
-    @@templates = ::YAML.load_file('config/templates.yml')
+    @@templates = ::YAML.load_file(File.join(Sciigo.conf_dir, 'templates.yml'))
 
     def initialize(notification)
       @notification = notification
