@@ -16,7 +16,7 @@ ssh_options[:paranoid] = false
 ssh_options[:compression] = "none"
 
 # repository settings
-set :repository, "git@gitlab.eox.at:marko.locher/scriigo.git"
+set :repository, "git@github.com:EOX-A/sciigo.git"
 set :branch, "production"
 
 # Put the app in this directory
