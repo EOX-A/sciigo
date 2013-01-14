@@ -6,6 +6,7 @@ gem "mustache"
 gem 'capistrano'
 
 group :test do
+  gem 'rake'
   gem 'spinach'
-  # gem 'rspec'
+  gem 'rspec'
 end
