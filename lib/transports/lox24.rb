@@ -18,8 +18,9 @@ module Sciigo
                   :password   => Digest::MD5.hexdigest(config['lox24']['password']),
                   :service    => config['lox24']['service'],
                   :from       => config['lox24']['from'],
-                  :text    => "#{message.title}\n#{message.message}\n#{config['nagios']['url']}",
-                  :return     => 'xml'
+                  :text       => "#{message.title}\n#{message.message}\n#{config['nagios']['url']}",
+                  :return     => 'xml',
+                  :httphead   => 1
                   } 
       end
 
@@ -30,7 +31,7 @@ module Sciigo
       def send
         setup
         validate
-        get(uri, @data)
+        post(uri, @data)
       end
     end
   end

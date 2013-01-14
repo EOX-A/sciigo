@@ -1,0 +1,8 @@
+language: ruby
+bundler_args: --without development deploy
+notifications:
+  recipients:
+    - marko.locher@eox.at
+rvm:
+  - 1.9.3
+  - 1.9.2

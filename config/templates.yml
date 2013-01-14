@@ -19,20 +19,20 @@ host:
     message: "You need to check that immediately. Check said '{{HOSTOUTPUT}}'!"
   problem:
     title: "There is a problem with {{HOSTNAME}}!"
-    message: "Host is {{ HOSTSTATE | downcase }} since {{SERVICEDURATION}}. Check said '{{HOSTOUTPUT}}'"
+    message: "Host is {{ HOSTSTATE}} since {{SERVICEDURATION}}. Check said '{{HOSTOUTPUT}}'"
   recovery:
     title: "{{HOSTNAME}} is fine again!"
-    message: "Host is {{ HOSTSTATE | downcase }} since {{HOSTDURATION}}. Check said '{{HOSTOUTPUT}}'"
+    message: "Host is {{ HOSTSTATE }} since {{HOSTDURATION}}. Check said '{{HOSTOUTPUT}}'"
 service:
   default:
     title: "S {{SERVICEDESC}} on {{HOSTNAME}}!"
     message: "Please check the service, there might be a problem! Service said '{{SERVICEOUTPUT}}'"
   problem:
     title: "S {{SERVICEDESC}}: {{SERVICESTATE}} on {{HOSTNAME}}!"
-    message: "Service State is {{SERVICESTATE | downcase}} since {{SERVICEDURATION}}. Service said '{{SERVICEOUTPUT}}'"
+    message: "Service State is {{SERVICESTATE}} since {{SERVICEDURATION}}. Service said '{{SERVICEOUTPUT}}'"
   recovery:
     title: "S {{SERVICEDESC}}: {{SERVICESTATE}} on {{HOSTNAME}}!"
-    message: "Service State is {{SERVICESTATE | downcase}} since {{SERVICEDURATION}}. Service said '{{SERVICEOUTPUT}}'"
+    message: "Service State is {{SERVICESTATE}} since {{SERVICEDURATION}}. Service said '{{SERVICEOUTPUT}}'"
   acknowledgment:
     title: "S Ack for {{SERVICEDESC}} on {{HOSTNAME}}!"
     message: "{{SERVICEACKAUTHOR}} acknowledged the problem! Comment was '{{SERVICEACKCOMMENT}}'"

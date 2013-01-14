@@ -2,7 +2,7 @@ require 'uri'
 
 module Sciigo
   class Message
-    @@templates = ::YAML.load_file('config/templates.yml')
+    @@templates = ::YAML.load_file(File.join(Sciigo.conf_dir, 'templates.yml'))
 
     def initialize(notification)
       @notification = notification
@@ -16,11 +16,11 @@ module Sciigo
     end
 
     def message
-      return @message ||= Liquid::Template.parse(template('message')).render(@notification)
+      return @message ||= Mustache.render(template('message'), @notification)
     end
 
     def title
-      return @title ||= Liquid::Template.parse(template('title')).render(@notification)
+      return @title ||= Mustache.render(template('title'), @notification)
     end
 
     def time

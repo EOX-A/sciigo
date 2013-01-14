@@ -1,9 +1,17 @@
 source 'https://rubygems.org'
 
-# liquid template engine
-gem 'liquid'
+# mustache template engine
+gem "mustache"
+
+group :development do
+end
+
+group :deploy do
+  gem 'capistrano'
+end
 
 group :test do
+  gem 'rake'
   gem 'spinach'
-  # gem 'rspec'
+  gem 'rspec'
 end

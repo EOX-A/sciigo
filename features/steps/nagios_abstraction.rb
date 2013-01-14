@@ -1,6 +1,3 @@
-require './lib/sciigo.rb'
-Dir['./lib/**/*.rb'].each { |file| require file }
-
 class Spinach::Features::NagiosAbstraction < Spinach::FeatureSteps
   include CommonSteps::Nagios
 

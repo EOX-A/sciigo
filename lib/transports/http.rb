@@ -31,16 +31,23 @@ module Sciigo
             raise Sciigo::Transport::Error,  'Unsupported HTTP request type %s' % type 
           end
 
-          response = Net::HTTP.new(url.host, url.port)
-          
-          if( url.port == 443 )
-            response.use_ssl = true
-            response.verify_mode = OpenSSL::SSL::VERIFY_NONE
+          http = Net::HTTP.new(url.host, url.port)
+          if url.port == 443
+            http.use_ssl = true
+            http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+
+            # use a bundled version of the mozilla certificate authorities
+            # see http://curl.haxx.se/ca/cacert.pem for more information
+            http.ca_file = File.join(Sciigo.conf_dir, "ca-bundle.crt")
           end
 
-          log.info response.start { |http|
-            http.request(request) 
+          response = http.start { |h|
+            h.request(request) 
           }
+
+          log.info { response.inspect }
+          log.debug { response.to_hash }
+          log.debug { response.body }
         rescue Exception => e
           log.fatal { 'Exception sending notification, %p' % e }
           exit 1
