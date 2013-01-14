@@ -1,0 +1,18 @@
+log:
+  file: 'logs/sciigo.log'
+  level: 'DEBUG'
+  keep: 2
+  size: 10485760
+nagios:
+  url: 'https://nagios.your-domain.com/nagios3/'
+  extinfo: 'https://nagios.your-domain.com/cgi-bin/nagios3/extinfo.cgi'
+pushover:
+  api: 'https://api.pushover.net/1/messages.json'
+  token: '<your-pushover-api-token>'
+lox24:
+  api: 'https://www.lox24.eu/API/httpsms.php'
+  konto: 'your-lox24-konto-number'
+  password: 'your-lox24-password'
+  service: 1970
+  from: 'Nagios'
+vars:

@@ -2,6 +2,8 @@ module Sciigo
   module Transport
     
     def self.new(transport, message)
+      raise Error, "No transport specified" unless transport
+      
       require "#{File.dirname(__FILE__)}/transports/#{transport}.rb"
       return Sciigo::Transport.const_get(transport.to_s.capitalize).new(message)
     end
