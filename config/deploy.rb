@@ -27,12 +27,17 @@ set :deploy_via, :remote_cache
 role :app, "nix.eox.at"
 
 # if you want to clean up old releases on each deploy uncomment this:
+before "deploy:restart", "deploy:symlink_config"
 after "deploy:restart", "deploy:cleanup"
 
 # no need to start, stop, ... anything, as this app is only a script called
 # by nagios / icinga
 namespace :deploy do
-    task :start do ; end
-    task :stop do ; end
-    task :restart do ; end
+  task :start do ; end
+  task :stop do ; end
+  task :restart do ; end
+
+  task :symlink_config do
+    run "ln -s #{shared_path}/sciigo.yml #{release_path}/config/"
+  end
 end
