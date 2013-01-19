@@ -1,7 +1,7 @@
 class Spinach::Features::Nagios < Spinach::FeatureSteps
   step 'I have a basic set of environment variables' do
     @env = {
-      'NAGIOS_CONTACTEMAIL'     => 'mailto:marko.locher@eox.at', 
+      'NAGIOS_CONTACTEMAIL'     => 'mailto://marko.locher@eox.at', 
       'NAGIOS_CONTACTALIAS'     => 'Marko Locher',
       'NAGIOS_SERVICEDESC'      => 'Sciigo Tests',
       'SOME_OTHER_VARIABLE'     => 'some other value',
