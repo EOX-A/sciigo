@@ -1,9 +1,10 @@
 #!/usr/bin/ruby
 
-# change to the install dir
-Dir.chdir(File.expand_path(File.dirname(__FILE__)))
-
+require 'pathname'
 require 'getoptlong'
+
+# change to the install dir
+Dir.chdir(File.dirname(Pathname.new(__FILE__).realpath))
 require './lib/sciigo.rb'
 
 # Variables used in Help and stuff
