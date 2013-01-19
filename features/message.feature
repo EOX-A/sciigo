@@ -1,6 +1,9 @@
-Feature: Message model
-  
-  Scenario: Test basic setup
-    Given I have an array of Environment Variables
-    When I create a new instance of the message class 
-    Then basic attributes should be set
+Feature: Message
+  Scenario: Basic message creation
+    Given I have a full set of environment variables
+    And I instantiate a new Sciigo::Nagios object
+    When I create a new Sciigo::Message object
+    Then it should have the recipient set
+    And it should have a message set
+    And it should have a priority
+    And it should have a url
