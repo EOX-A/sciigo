@@ -17,15 +17,15 @@ class Spinach::Features::Sciigo < Spinach::FeatureSteps
   end
 
   step 'I should get a Hash' do
-    @config.is_a?(Hash)
+    expect(@config).to be_an_instance_of(Hash)
   end
 
   step 'it should include a log key' do
-    @config.has_key?('log')
+    expect(@config).to have_key('log')
   end
 
   step 'this hash should include a vars key' do
-    @config.has_key?('vars')
+    expect(@config).to have_key('vars')
   end
 
   step 'I ask for the logger' do
@@ -33,6 +33,6 @@ class Spinach::Features::Sciigo < Spinach::FeatureSteps
   end
 
   step 'I should get a object which responds to the log method' do
-    @log.respond_to?(:log)
+    expect(@log).to be_an_instance_of(Logger)
   end
 end
