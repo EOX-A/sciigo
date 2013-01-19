@@ -9,16 +9,16 @@ module Sciigo
       end
 
       def uri
-        config['lox24']['api']
+        Sciigo.config['lox24']['api']
       end
 
       def setup
         @data = { :to         => message.recipient, 
-                  :konto      => config['lox24']['konto'],
+                  :konto      => Sciigo.config['lox24']['konto'],
                   :password   => Digest::MD5.hexdigest(config['lox24']['password']),
-                  :service    => config['lox24']['service'],
-                  :from       => config['lox24']['from'],
-                  :text       => "#{message.title}\n#{message.message}\n#{config['nagios']['url']}",
+                  :service    => Sciigo.config['lox24']['service'],
+                  :from       => Sciigo.config['lox24']['from'],
+                  :text       => "#{message.title}\n#{message.message}\n#{Sciigo.config['nagios']['url']}",
                   :return     => 'xml',
                   :httphead   => 1
                   } 

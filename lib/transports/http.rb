@@ -45,11 +45,11 @@ module Sciigo
             h.request(request) 
           }
 
-          log.info { response.inspect }
-          log.debug { response.to_hash }
-          log.debug { response.body }
+          Sciigo.log.info { response.inspect }
+          Sciigo.log.debug { response.to_hash }
+          Sciigo.log.debug { response.body }
         rescue Exception => e
-          log.fatal { 'Exception sending notification, %p' % e }
+          Sciigo.log.fatal { 'Exception sending notification, %p' % e }
           exit 1
         end
       end

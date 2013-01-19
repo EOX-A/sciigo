@@ -1,14 +1,14 @@
 #!/usr/bin/ruby
 
-# change to the install dir
-Dir.chdir(File.expand_path(File.dirname(__FILE__)))
-
+require 'pathname'
 require 'getoptlong'
+
+# change to the install dir
+Dir.chdir(File.dirname(Pathname.new(__FILE__).realpath))
 require './lib/sciigo.rb'
 
 # Variables used in Help and stuff
 APP_NAME = 'sciigo'
-APP_VERSION = File.read('./VERSION').split('.')
 
 # Parse command line options
 opts = GetoptLong.new(
@@ -35,7 +35,7 @@ Other available options are
 EOF
       exit 0
     when '--version'
-      puts "#{APP_NAME} v#{APP_VERSION.join(".")}"
+      puts "#{APP_NAME} v#{File.read('./VERSION')}"
       exit 0
     when '--debug'
       Sciigo::log.level = Logger::DEBUG

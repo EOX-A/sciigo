@@ -9,6 +9,8 @@ module Sciigo
         end
       end
 
+      raise Sciigo::Error, "Missing Nagios environment variables, is this script being invoked by nagios?" if size == 0
+
       # parse the protocol from the contact email
       protocol = /^(\w+):\/\/(.*)/.match(fetch('contactemail'))
       if protocol
@@ -17,8 +19,6 @@ module Sciigo
       else
         self.store(:transport, nil)
       end
-
-      raise Sciigo::Error, "Missing Nagios environment variables, is this script being invoked by nagios?" if size == 0
     end
 
     # override some basic hash functions to make the key lookup more

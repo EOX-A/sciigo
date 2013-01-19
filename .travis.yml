@@ -1,5 +1,6 @@
 language: ruby
 bundler_args: --without development deploy
+before_script: cp config/sciigo.yml.example config/sciigo.yml
 notifications:
   recipients:
     - marko.locher@eox.at
