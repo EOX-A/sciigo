@@ -12,7 +12,7 @@ class Spinach::Features::Transport < Spinach::FeatureSteps
   end
 
   step 'I should get a Sciigo::Transport::Error exception' do
-    @error.is_a?(Sciigo::Transport::Error)
+    expect(@error).to be_an_instance_of(Sciigo::Transport::Error)
   end
 
   step 'I call Sciigo::Transport.new with an empty name' do
@@ -36,7 +36,7 @@ class Spinach::Features::Transport < Spinach::FeatureSteps
   end
 
   step 'I should get a corresping transport' do
-    @transport.is_a?(Sciigo::Transport::BasicTransport) || @transport.respond_to?(:send)
+    expect(@transport).to be_a_kind_of(Sciigo::Transport::BasicTransport)
   end
 
   step 'I have an unknown transport\'s name' do
@@ -44,7 +44,7 @@ class Spinach::Features::Transport < Spinach::FeatureSteps
   end
 
   step 'I should get a Sciigo::Transport::UnknownTransport error' do
-    @error.is_a?(Sciigo::Transport::UnknownTransport)
+    expect(@error).to be_an_instance_of(Sciigo::Transport::UnknownTransport)
   end
 
 end

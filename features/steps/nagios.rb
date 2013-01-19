@@ -37,69 +37,70 @@ class Spinach::Features::Nagios < Spinach::FeatureSteps
   end
 
   step 'I should get a Hash(like) object' do
-    @nagios.is_a?(Hash)
+    expect(@nagios).to be_a_kind_of(Hash)
   end
 
   step 'it should contain the Nagios variables' do
-    @nagios.has_key?(:contactemail)
-    @nagios.has_key?(:contactalias)
+    expect(@nagios).to have_key(:contactemail)
+    expect(@nagios).to have_key(:contactalias)
   end
 
   step 'it should not contain non Nagios variables' do
-    !@nagios.has_key?(:some_other_variable)
+    expect(@nagios).to_not have_key(:some_other_variable)
   end
 
   step 'I should get an Sciigo::Error' do
-    @error.is_a?(Sciigo::Error)
+    #TODO not a good way to check for exceptions
+    expect(@error).to be_an_instance_of(Sciigo::Error)
   end
 
   step 'it should respond to the transport method' do
-    @nagios.respond_to? :transport
+    expect(@nagios).to have_key(:transport)
   end
 
   step 'the transport should be the email up to the first colon' do
-    @nagios.transport == /^(\w+):\/\/(.*)/.match(@env['NAGIOS_CONTACTEMAIL'])
+    expect(@nagios.transport).to eq('mailto')
   end
 
   step 'the contactemail should not start with the transport' do
-    !@nagios.contactemail.start_with?(@nagios.transport)
+    expect(@nagios.contactemail).to_not start_with('mailto')
   end
 
   step 'I should be able to access the variables with []' do
-    @nagios['CONTACTEMAIL'] == @env['NAGIOS_CONTACTEMAIL']
+    expect(@nagios['CONTACTEMAIL']).to eq('marko.locher@eox.at')
   end
 
   step 'with the variables name as method name' do
-    @nagios.contactemail == @env['NAGIOS_CONTACTEMAIL']
+    expect(@nagios.contactemail).to eq('marko.locher@eox.at')
   end
 
   step 'via the fetch method' do
-    @nagios.fetch(:contactemail) == @env['NAGIOS_CONTACTEMAIL']
+    expect(@nagios.fetch(:contactemail)).to eq('marko.locher@eox.at')
   end
 
   step 'the case of a key should not matter' do
-    @nagios['CONTACTEMAIL'] == @nagios['contactemail']
+    expect(@nagios['CONTACTEMAIL']).to eq(@nagios['contactemail'])
   end
 
   step 'the category method should respond with :host' do
-    @nagios.category == :host
+    expect(@nagios.category).to eq(:host)
   end
 
   step 'the host method should return true' do
-    @nagios.host? == true
+    expect(@nagios.host?).to be_true  
   end
 
   step 'the category method should respond with :service' do
-    @nagios.category == :service
+    expect(@nagios.category).to eq(:service)
   end
 
   step 'the service method should return true' do
-    @nagios.service? == true
+    expect(@nagios.service?).to be_true
   end
 
   step 'the type method should respond with one of serveral notification types' do
     #"PROBLEM", "RECOVERY", "ACKNOWLEDGEMENT", "FLAPPINGSTART", "FLAPPINGSTOP", "FLAPPINGDISABLED", "DOWNTIMESTART", "DOWNTIMEEND", or "DOWNTIMECANCELLED"
     # taken from http://nagios.sourceforge.net/docs/3_0/macrolist.html#notificationtype
-    [:problem, :recovery, :acknowledgement, :flappingstart, :flappingstop, :flappingdisabled, :downtimestart, :downtimeend, :downtimecancelled].include?(@nagios.type)
+    expect([:problem, :recovery, :acknowledgement, :flappingstart, :flappingstop, :flappingdisabled, :downtimestart, :downtimeend, :downtimecancelled]).to include(@nagios.type)
   end
 end

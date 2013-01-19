@@ -2,7 +2,7 @@ module Sciigo
   module Transport
     
     def self.new(transport, message)
-      raise Sciigo::Transport::Error, "No transport specified" unless transport
+      raise Sciigo::Transport::Error, "No transport specified" if transport.empty?
       
       begin
         require "#{File.dirname(__FILE__)}/transports/#{transport}.rb"
