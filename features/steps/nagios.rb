@@ -1,10 +1,11 @@
 class Spinach::Features::Nagios < Spinach::FeatureSteps
   step 'I have a basic set of environment variables' do
     @env = {
-      'NAGIOS_CONTACTEMAIL' => 'mailto:marko.locher@eox.at', 
-      'NAGIOS_CONTACTALIAS' => 'Marko Locher',
-      'NAGIOS_SERVICEDESC'  => 'Sciigo Tests',
-      'SOME_OTHER_VARIABLE' => 'some other value',
+      'NAGIOS_CONTACTEMAIL'     => 'mailto:marko.locher@eox.at', 
+      'NAGIOS_CONTACTALIAS'     => 'Marko Locher',
+      'NAGIOS_SERVICEDESC'      => 'Sciigo Tests',
+      'SOME_OTHER_VARIABLE'     => 'some other value',
+      'NAGIOS_NOTIFICATIONTYPE' => 'PROBLEM'
     }
     ENV.update(@env)
   end
@@ -96,4 +97,9 @@ class Spinach::Features::Nagios < Spinach::FeatureSteps
     @nagios.service? == true
   end
 
+  step 'the type method should respond with one of serveral notification types' do
+    #"PROBLEM", "RECOVERY", "ACKNOWLEDGEMENT", "FLAPPINGSTART", "FLAPPINGSTOP", "FLAPPINGDISABLED", "DOWNTIMESTART", "DOWNTIMEEND", or "DOWNTIMECANCELLED"
+    # taken from http://nagios.sourceforge.net/docs/3_0/macrolist.html#notificationtype
+    [:problem, :recovery, :acknowledgement, :flappingstart, :flappingstop, :flappingdisabled, :downtimestart, :downtimeend, :downtimecancelled].include?(@nagios.type)
+  end
 end

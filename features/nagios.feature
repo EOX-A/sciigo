@@ -43,3 +43,8 @@ Feature: Nagios
     When I instantiate a new Sciigo::Nagios object
     Then the category method should respond with :service
     And the service method should return true
+
+   Scenario: Differentiate notification type
+    Given I have a basic set of environment variables
+    When I instantiate a new Sciigo::Nagios object
+    Then the type method should respond with one of serveral notification types
