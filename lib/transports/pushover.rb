@@ -8,15 +8,15 @@ module Sciigo
       end
 
       def uri
-        config['pushover']['api']
+        Sciigo.config['pushover']['api']
       end
 
       def setup
         string, user, device = /([A-Za-z0-9]{30}):?([A-Za-z0-9_-]{1,25})?/.match(message.recipient).to_a
-        @data = { :user     => user, 
-                  :device   => device,
-                  :token      => config['pushover']['token'], 
-                  :priority => message.priority ? '1' : '0',
+        @data = { :user       => user, 
+                  :device     => device,
+                  :token      => Sciigo.config['pushover']['token'], 
+                  :priority   => message.priority ? '1' : '0',
                   :message    => message.message,
                   :title      => message.title,
                   :timestamp  => message.time.to_i,

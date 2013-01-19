@@ -18,14 +18,6 @@ module Sciigo
       end
 
       private
-      def log
-        Sciigo.log
-      end
-
-      def config
-        Sciigo.config
-      end
-
       def message
         @message
       end
