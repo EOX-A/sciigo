@@ -7,5 +7,7 @@ notifications:
 env:
   - TRAVIS=true
 rvm:
+  - 2.0.0
   - 1.9.3
   - 1.9.2
+  - 1.8.7
