@@ -4,6 +4,8 @@ before_script: cp config/sciigo.yml.example config/sciigo.yml
 notifications:
   recipients:
     - marko.locher@eox.at
+env:
+  - TRAVIS=true
 rvm:
   - 1.9.3
   - 1.9.2
