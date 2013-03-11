@@ -24,14 +24,17 @@ module Sciigo
     # override some basic hash functions to make the key lookup more
     # generic and 
     def [](key)
+      key = key.to_s unless key.respond_to?(:downcase)
       super(key.downcase.to_sym)
     end
 
     def fetch(key)
+      key = key.to_s unless key.respond_to?(:downcase)
       super(key.downcase.to_sym)
     end
 
     def has_key?(key)
+      key = key.to_s unless key.respond_to?(:downcase)
       super(key.downcase.to_sym)
     end
 
