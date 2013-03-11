@@ -1,5 +1,10 @@
 require 'rspec'
 
+if ENV['TRAVIS']
+  require 'coveralls'
+  Coveralls.wear!
+end
+
 # require the application files
 require '#{File.dirname(__FILE__)}/../../lib/sciigo.rb'
 Dir['#{File.dirname(__FILE__)}/../../lib/**/*.rb'].each { |file| 
