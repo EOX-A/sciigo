@@ -17,7 +17,7 @@ ssh_options[:compression] = "none"
 
 # repository settings
 set :repository, "git@github.com:EOX-A/sciigo.git"
-set :branch, "production"
+set :branch, "master"
 
 # Put the app in this directory
 set :deploy_to, "/opt/#{application}"
