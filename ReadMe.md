@@ -1,4 +1,4 @@
-# Sciigo [![Build Status](https://travis-ci.org/EOX-A/sciigo.png)](https://travis-ci.org/EOX-A/sciigo) [![Dependency Status](https://gemnasium.com/EOX-A/sciigo.png)](https://gemnasium.com/EOX-A/sciigo) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/EOX-A/sciigo)
+# Sciigo [![Build Status](https://travis-ci.org/EOX-A/sciigo.png)](https://travis-ci.org/EOX-A/sciigo) [![Dependency Status](https://gemnasium.com/EOX-A/sciigo.png)](https://gemnasium.com/EOX-A/sciigo) [![Coverage Status](https://coveralls.io/repos/EOX-A/sciigo/badge.png?branch=master)](https://coveralls.io/r/EOX-A/sciigo) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/EOX-A/sciigo)
 
 Sciigo is a lightweight notification framework for Nagios (and, with a few changes, icinga). 
 
